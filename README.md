@@ -23,65 +23,63 @@ HuggingFace Inference Endpoints are dedicated, scalable, and secure infrastructu
 
 ## Usage
 
-### Setup
-
 1. **Create a HuggingFace Account:**
    - Sign up at [HuggingFace](https://huggingface.co) and enable billing for your account.
    - Enable [inference endpoints](https://ui.endpoints.huggingface.co/) for your account
    - Create an API token with access to Inference Endpoints.
 
 2. **Configure Deployment:**
-   - Edit `deploy-to-hf.py` to include:
-     - `repo_name`: Location of your repository on HuggingFace.
-     - `endpoint_name`: Name for your endpoint.
-     - `hf_username`: Your HuggingFace username.
+- Edit `deploy-to-hf.py` to include:
+   `repo_name`: Location of your repository on HuggingFace.
+   `endpoint_name`: Name for your endpoint.
+   `hf_username`: Your HuggingFace username.
 
 3. **Set Environment Variable:**
-   ```bash
-   export HF_API_KEY="your_huggingface_api_token"
-   ```
+    ```bash
+    export HF_API_KEY="your_huggingface_api_token"
+    ```
 
 4. **Install local dependendencies**
-```bash
-pip install -r local-requirements.txt
-```
+    ```bash
+    pip install -r local-requirements.txt
+    ```
 
 5. **Deploy to HuggingFace:**
    ```bash
    python3 deploy-to-hf.py
    ```
 
-### Custom Prompts
+## Custom Prompts
 
 1. **Add a New Task Type:**
-   - Add your new `TaskType` to `structs.py`.
+- Add your new `TaskType` to `structs.py`.
 
 2. **Update Prompt Templates:**
-   - Define a new `PromptTemplate` in `defaults.py` with your custom prompt mapped to the newly created TaskType.
+- Define a new `PromptTemplate` in `defaults.py` with your custom prompt mapped to the newly created TaskType.
 
 3. **Deploy Custom Docker Container:**
-   - Follow the instructions under [Deploy Custom Changes](#deploy-custom-changes) to reflect your customizations.
+- Follow the instructions under [Deploy Custom Changes](#deploy-custom-changes) to reflect your customizations.
 
 ## Deploy Custom Changes
 
 If you make changes to the repository, you need to redeploy a custom Docker container to reflect these updates on your endpoint.
 
 1. **Edit Docker Deployment:**
-   - Modify `deploy-docker.sh` to replace `"YOUR_DOCKERHUB_USERNAME"` with your DockerHub username.
+- Modify `deploy-docker.sh` to replace `"YOUR_DOCKERHUB_USERNAME"` with your DockerHub username.
 
 2. **Run Deploy Docker Script**
-```bash
-chmod +x deploy-docker.sh
-./deploy-docker.sh
-```
+    ```bash
+    chmod +x deploy-docker.sh
+    ./deploy-docker.sh
+    ```
 
 2. **Update Docker Image:**
-   - In the `create_inference_endpoint` function, update the image with your custom Docker image URL:
-   ```python
-   "custom": {
-       "url": "docker.io/YOUR_DOCKERHUB_USERNAME/unsloth-hf-inference:latest"
-   }
-   ```
+- In the `create_inference_endpoint` function, update the image with your custom Docker image URL:
+    ```python
+    "custom": {
+        "url": "docker.io/YOUR_DOCKERHUB_USERNAME/unsloth-hf-inference:latest"
+    }
+    ```
 
 ## Running Locally
 
@@ -91,14 +89,14 @@ To run the application locally for testing and development, follow these steps:
 Follow Unsloth Docs to install unsloth: https://docs.unsloth.ai
 
 2. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 3. **Start the Server:**
-   ```bash
-   uvicorn inference.server:app --host 0.0.0.0 --port 80
-   ```
+    ```bash
+    uvicorn inference.server:app --host 0.0.0.0 --port 80
+    ```
 
 ## Using HF Endpoints
 
@@ -116,12 +114,12 @@ curl -X POST <endpoint_url>/predict \
          }'
 ```
 
-- **Expected Response:**
-  ```json
-  {
+**Expected Response:**
+```json
+{
     "response": "Model output based on the input text"
-  }
-  ```
+}
+```
 
 ### cURL Request for `/chat`
 
@@ -134,7 +132,7 @@ curl -X POST <endpoint_url>/chat \
          }'
 ```
 
-- **Expected Response:**
+**Expected Response:**
   ```json
   {
     "last_message": "I'm doing well, thank you! How can I assist you today?",
@@ -145,10 +143,9 @@ curl -X POST <endpoint_url>/chat \
   }
   ```
 
-
 ## FAQ
 
-### What is Unsloth and how to add Unsloth models to HF Hub?
+### What is Unsloth & how to add Unsloth models to HuggingFace Hub?
 For more information on Unsloth and adding models to the HuggingFace Hub, please refer to the [Unsloth Docs](https://docs.unsloth.ai/).
 
 ### Do I have to use this with HF Inference Endpoints?
