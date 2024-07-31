@@ -64,6 +64,12 @@ If you make changes to the repository, you need to redeploy a custom Docker cont
 1. **Edit Docker Deployment:**
    - Modify `deploy-docker.sh` to replace `"YOUR_DOCKERHUB_USERNAME"` with your DockerHub username.
 
+2. **Run Deploy Docker Script**
+```bash
+chmod +x deploy-docker.sh
+./deploy-docker.sh
+```
+
 2. **Update Docker Image:**
    - In the `create_inference_endpoint` function, update the image with your custom Docker image URL:
    ```python
