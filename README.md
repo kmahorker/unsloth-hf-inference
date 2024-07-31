@@ -41,7 +41,12 @@ HuggingFace Inference Endpoints are dedicated, scalable, and secure infrastructu
    export HF_API_KEY="your_huggingface_api_token"
    ```
 
-4. **Deploy to HuggingFace:**
+4. **Install local dependendencies**
+```bash
+pip install -r local-requirements.txt
+```
+
+5. **Deploy to HuggingFace:**
    ```bash
    python3 deploy-to-hf.py
    ```

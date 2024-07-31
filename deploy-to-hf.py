@@ -86,9 +86,9 @@ async def poll_endpoint_status(endpoint_name: str, hf_username: str, max_attempt
     
     raise Exception("Endpoint creation timed out")
 
-async def deploy_model(repo_name: str, endpoint_name: str):
+async def deploy_model(hf_username: str, repo_name: str, endpoint_name: str):
     try:
-        endpoint_response = await create_inference_endpoint(endpoint_name, repo_name)
+        endpoint_response = await create_inference_endpoint(endpoint_name, repo_name, hf_username)
         print(f"Endpoint created: {endpoint_response}")
     except Exception as e:
         raise Exception(f"Deployment failed: {e}")
@@ -103,4 +103,5 @@ if __name__ == "__main__":
     if os.environ["HF_API_KEY"] == "":
         raise Exception("Please set HF_API_KEY env variable. Ensure all required settings are updated in deploy-to-hf.py")
     
-    asyncio.run(deploy_model(repo_name, endpoint_name))
+    print("Deploying model, please wait...")
+    asyncio.run(deploy_model(hf_username, repo_name, endpoint_name))
